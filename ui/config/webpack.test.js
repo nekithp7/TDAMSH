@@ -45,31 +45,6 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
             },
-            // {
-            //     test: /\.scss$/, 
-            //     loader: ExtractTextPlugin.extract(['style-loader', 'css-loader', 'sass-loader']),
-            //     exclude: [helpers.root('src/index.html')]
-            // },
-            // {
-            //     test: /\.scss$/,
-            //     exclude: helpers.root('src', 'app'),
-            //     loader: 'null-loader'
-            // },
-            // {
-            //     test: /\.css$/,
-            //     exclude: helpers.root('src', 'app'),
-            //     loader: 'null-loader'
-            // },
-            // {
-            //     test: /\.scss$/,
-            //     include: helpers.root('src', 'app'),
-            //     loader: 'raw-loader'
-            // },
-            // {
-            //     test: /\.css$/,
-            //     include: helpers.root('src', 'app'),
-            //     loader: 'raw-loader'
-            // },
             {
                 enforce: 'post',
                 test: /\.(js|ts)$/,

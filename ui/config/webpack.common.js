@@ -20,7 +20,8 @@ module.exports = {
             {
                 test: /\.ts$/,
                 enforce: 'pre',
-                loader: 'tslint-loader'
+                loader: 'tslint-loader',
+                exclude: /node_modules/
             },
             {
                 test: /\.ts$/,
@@ -76,14 +77,6 @@ module.exports = {
 
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        }),
-        new TypedocWebpackPlugin({
-            name: 'Contoso',
-            mode: 'file',
-            theme: './typedoc-theme/',
-            includeDeclarations: false,
-            ignoreCompilerErrors: true,
-            json: './docs.json'
-        }, ['./src'])
+        })
     ]
 };

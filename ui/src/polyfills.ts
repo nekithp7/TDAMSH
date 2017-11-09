@@ -6,6 +6,6 @@ if (process.env.ENV === 'production') {
 // Production
 } else {
 // Development and tes
-    Error['stackTraceLimit'] = Infinity;
-    require('zone.js/dist/long-stack-trace-zone');
+	Error['stackTraceLimit'] = Infinity;
+	require('zone.js/dist/long-stack-trace-zone');
 }
