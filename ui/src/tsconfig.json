@@ -21,7 +21,6 @@
     "types": [
       "jasmine",
       "jquery",
-      "lodash",
       "node"
     ]
   },
