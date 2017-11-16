@@ -13,10 +13,10 @@ export class LoginComponent {
 	public user = new User();
 
 	constructor(private store: Store<AppState>,
-		private usrerAction: UserActions, ) {
+		private usrerAction: UserActions) {
 		this.store.subscribe((data) => {
 			// STORE DATA
-		 });
+		});
 
 	}
 

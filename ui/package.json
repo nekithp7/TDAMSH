@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run client",
-    "client": "webpack-dev-server --inline --progress --port 8080",
+    "client": "webpack-dev-server --inline --progress --port 3000",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "test": "karma start karma.conf.js --singleRun true --autoWatch false",
     "test:watch": "karma start karma.conf.js --singleRun false --autoWatch true"
