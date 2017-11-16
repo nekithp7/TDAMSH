@@ -10,25 +10,27 @@ import { SharedModule } from '../../shared/shared.module';
 describe('AUTH_PAGE::COMPONENT', () => {
 	let component: LoginComponent;
 	let fixture: ComponentFixture<LoginComponent>;
-	let mockStore: Store<AppState>;
-	let mockActions: UserActions;
+	// let mockStore: Store<AppState>;
+	// let mockActions: UserActions;
 
 	beforeEach(() => {
-		mockStore = {
-			subscribe: null
-		} as Store<AppState>;
-		spyOn(mockStore, 'subscribe');
+		// mockStore = {
+		// 	subscribe: null
+		// } as Store<AppState>;
+		// spyOn(mockStore, 'subscribe');
 
 		TestBed.configureTestingModule({
 			imports: [SharedModule],
-			providers: [{
-				provide: Store,
-				useValue: mockStore
-			},
-			{
-				provide: UserActions,
-				useValue: mockActions
-			}],
+			providers: [
+			// 	{
+			// 	provide: Store,
+			// 	useValue: mockStore
+			// },
+			// {
+			// 	provide: UserActions,
+			// 	useValue: mockActions
+			// }
+		],
 			declarations: [LoginComponent],
 		});
 		fixture = TestBed.createComponent(LoginComponent);

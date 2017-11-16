@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { User } from '../index';
 import { Store } from '@ngrx/store';
+
+import { User } from '../index';
 import { AppState } from '../../app.reducer';
 import { UserActions } from '../user.actions';
+import { UserCredentials } from './login.component.model';
 
 @Component({
 	selector: 'tdamsh-login',
@@ -10,17 +12,8 @@ import { UserActions } from '../user.actions';
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-	public user = new User();
-
-	constructor(private store: Store<AppState>,
-		private usrerAction: UserActions) {
-		this.store.subscribe((data) => {
-			// STORE DATA
-		});
-
-	}
-
-	public onAction(): void {
-		this.store.dispatch(this.usrerAction.createUser(this.user));
-	}
+	public userCredentials: UserCredentials = {
+		email: '',
+		password: ''
+	};
 }

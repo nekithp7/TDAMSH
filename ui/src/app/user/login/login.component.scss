@@ -1,0 +1,22 @@
+@import '../../../assets/style/color.variables.scss';
+.login {
+    display: flex;
+    justify-content: center;
+    .login-form {
+        padding: 10px;
+        background: $transperent-grey-background-04;
+        width: 300px;
+        margin-top: 20%;
+        &__field {
+            &-set {
+                display: flex;
+            }
+            &-label {
+                width: 30%;
+            }
+            &-input {
+                width: 70%;
+            }
+        }
+    }
+}
