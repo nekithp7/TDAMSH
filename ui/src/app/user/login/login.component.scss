@@ -1,0 +1,50 @@
+@import '../../../assets/style/color.variables.scss';
+.login {
+    display: flex;
+    justify-content: center;
+    .login-form {
+        padding: 10px;
+        background: $transperent-grey-background-04;
+        width: 300px;
+        height: 300px;
+        margin-top: 10%;
+        &__field {
+            &-set {
+                display: flex;
+                margin: 35px 0;
+                &--with-password-hint {
+                    margin-bottom: 5px;
+                }
+                &--password-hint {
+                    margin-top: 5px;
+                }
+            }
+            &-password-hint{
+                margin-top: 5px;
+            }
+            &-input {
+                width: 100%;
+            }
+        }
+        &__button {
+            width: 100%;
+            padding: 5px;
+        }
+        &__links {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        &__link {
+            text-decoration: none;
+            color: $primary-title-font-color;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+            &:active {
+                text-decoration: none;
+            }
+        }
+    }
+}

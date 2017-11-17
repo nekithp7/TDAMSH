@@ -1,11 +1,38 @@
 <div class="login">
-	<div>
-		name
-		<input [(ngModel)]="user.name"> id
-		<input [(ngModel)]="user.id"> email
-		<input [(ngModel)]="user.email"> surname
-		<input [(ngModel)]="user.surname">
-		<button (click)="onAction()">action</button>
-	</div>
-	asd
+	<form class="login-form">
+		<div class="login-form__field-set">
+			<input class="login-form__field-input"
+				placeholder="Email"
+				name="email"
+				[(ngModel)]="userCredentials.email">
+		</div>
+		<div class="login-form__field-set login-form__field-set--with-password-hint">
+			<input class="login-form__field-input"
+				placeholder="Password"
+				name="password"
+				[type]="!userCredentials.isPaswordVisible ? 'password' : 'text'"
+				[(ngModel)]="userCredentials.password">
+		</div>
+		<div class="login-form__field-set login-form__field-set--password-hint">
+			<tdamsh-checkbox 
+				[(value)]="userCredentials.isPaswordVisible"
+				[label]="'Show Password'">
+			</tdamsh-checkbox>		
+		</div>
+		<div class="login-form__controls">
+			<button class="login-form__button button-primary" 
+				(click)="onSingIn()">
+				Sing In
+			</button>
+		</div>
+		<div class="login-form__links">
+			<a class="login-form__link"
+				routerLink="../registration">
+				New user?
+			</a>
+			<a class="login-form__link">
+				Forgot a password?
+			</a>
+		</div>
+	</form>
 </div>

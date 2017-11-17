@@ -1,0 +1,35 @@
+@import '../../../assets/style/color.variables.scss';
+$header-height:50px;
+.auth-page {
+    height: 100%;
+    background: url("./src/assets/img/bg.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+        height: $header-height;
+    }
+    &__content {
+        height: calc(100% - $header-height);
+    }
+    .auth-header {
+        color: $primary-title-font-color;
+        background: $transperent-grey-background-03;
+        &__item {
+            font-size: 20px;
+            margin: 0 20px;
+            align-self: center;
+            border: transparent 2px solid;
+            &:hover {
+                border-bottom: $primary-application-color 2px solid;
+            }
+        }
+        &__link {
+            text-decoration: none;
+            color: $primary-title-font-color;
+            cursor: pointer;
+        }
+    }
+}

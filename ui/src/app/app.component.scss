@@ -1,0 +1,33 @@
+@import '../assets/style/color.variables.scss';
+@font-face {
+    font-family: "Open_Sans_Condensed";
+    src: url("../src/assets/fonts/Open_Sans_Condensed/OpenSansCondensed-Light.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open_Sans_Condensed", sans-serif;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+body,
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.button-primary {
+    border: none;
+    background-color: $primary-application-color;
+    color: $primary-title-font-color;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 0 10px $transperent-grey-background-04;
+    }
+}

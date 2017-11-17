@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run client",
-    "client": "webpack-dev-server --inline --progress --port 8080",
+    "client": "webpack-dev-server --inline --progress --port 3000",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "test": "karma start karma.conf.js --singleRun true --autoWatch false",
     "test:watch": "karma start karma.conf.js --singleRun false --autoWatch true"
@@ -33,7 +33,7 @@
     "zone.js": "^0.8.12"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.5.53",
+    "@types/jasmine": "2.5.41",
     "@types/node": "^7.0.31",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.1.3",
