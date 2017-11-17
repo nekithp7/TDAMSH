@@ -6,21 +6,34 @@
 				name="email"
 				[(ngModel)]="userCredentials.email">
 		</div>
-		<div class="login-form__field-set">
+		<div class="login-form__field-set login-form__field-set--with-password-hint">
 			<input class="login-form__field-input"
 				placeholder="Password"
 				name="password"
 				type="password"
 				[(ngModel)]="userCredentials.password">
 		</div>
+		<div class="login-form__field-set login-form__field-set--password-hint">
+			<tdamsh-checkbox 
+				[(data)]="userCredentials.isPaswordHidden"
+				[label]="'Show Password'">
+			</tdamsh-checkbox>
+			<!-- <label class="login-form__field-password-hint"> Show password
+				<input
+					name="showPasword"
+					type="checkbox"
+					[(ngModel)]="userCredentials.isPasswordHiden">
+			</label> -->
+		</div>
 		<div class="login-form__controls">
-			<button class="login-form__button button-primary">
+			<button class="login-form__button button-primary" 
+				(click)="onSingIn()">
 				Sing In
 			</button>
 		</div>
 		<div class="login-form__links">
 			<a class="login-form__link"
-				routerLink="auth/registration">
+				routerLink="../registration">
 				New user?
 			</a>
 			<a class="login-form__link">

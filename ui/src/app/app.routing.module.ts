@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './user/index';
 
 const appRoutes: Routes = <Routes>[
-	// { path: '', redirectTo: '/auth', pathMatch: 'full' },
+	// [TODO]: redirect to dashboard || home page; use canActivate guard -> redirect to login page
+	{ path: '', redirectTo: '/auth', pathMatch: 'full' },
 	{ path: '**', redirectTo: '/auth' }
 ];
 

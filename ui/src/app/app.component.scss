@@ -18,6 +18,10 @@ html {
     min-height: 100%;
 }
 
+a {
+    text-decoration: none;
+}
+
 .button-primary {
     border: none;
     background-color: $primary-application-color;

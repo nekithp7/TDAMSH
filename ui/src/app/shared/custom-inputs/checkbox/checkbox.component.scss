@@ -1,0 +1,29 @@
+@import '../../../../assets/style/color.variables.scss';
+.custom-checkbox {
+    input[type="checkbox"] {
+        display: none;
+    }
+    label {
+        color: inherit;
+        cursor: pointer;
+    }
+    input[type="checkbox"]+label:before {
+        border: 1px solid $primary-title-font-color;
+        content: "\00a0";
+        display: inline-block;
+        font: 18px sans-serif;
+        height: 20px;
+        margin: 0 .25em 0 0;
+        vertical-align: top;
+        width: 20px;
+    }
+    input[type="checkbox"]:checked+label:before {
+        color: $primary-application-color;
+        font-weight: 600;
+        content: "\03bd";
+        text-align: center;
+    }
+    input[type="checkbox"]:checked+label:after {
+        font-weight: bold;
+    }
+}

@@ -12,12 +12,21 @@
             &-set {
                 display: flex;
                 margin: 35px 0;
+                &--with-password-hint {
+                    margin-bottom: 5px;
+                }
+                &--password-hint {
+                    margin-top: 5px;
+                }
+            }
+            &-password-hint{
+                margin-top: 5px;
             }
             &-input {
                 width: 100%;
             }
         }
-        &__button{
+        &__button {
             width: 100%;
             padding: 5px;
         }
@@ -30,10 +39,10 @@
             text-decoration: none;
             color: $primary-title-font-color;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 text-decoration: underline;
             }
-            &:active{
+            &:active {
                 text-decoration: none;
             }
         }
