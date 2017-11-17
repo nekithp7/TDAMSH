@@ -7,28 +7,24 @@ import getID from '../../helpers/generate-id';
 	styleUrls: ['checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
-	@Input() public checked: boolean = false;
 	@Input() public name: string = 'checkbox';
 	@Input() public label: string = '';
 
-	@Input() set data(data: boolean) {
-		this.value = data;
-		this.onValueChanged.emit(this.value);
-	}
-	get data() {
-		return this.value;
+	@Output() public valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+	@Input('value')
+	set model(value: boolean) {
+		this.checkBoxValue = value;
+		this.valueChange.emit(this.checkBoxValue);
 	}
 
-	@Output() public onValueChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+	get model() {
+		return this.checkBoxValue;
+	}
 	private id: string = '';
-	private value: boolean = false;
+	private checkBoxValue: boolean = false;
 
 	public ngOnInit(): void {
 		this.id = getID();
-	}
-
-	private onStateChanged(): void {
-		this.onValueChanged.emit(this.value);
 	}
 }

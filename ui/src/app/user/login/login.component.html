@@ -10,20 +10,14 @@
 			<input class="login-form__field-input"
 				placeholder="Password"
 				name="password"
-				type="password"
+				[type]="!userCredentials.isPaswordVisible ? 'password' : 'text'"
 				[(ngModel)]="userCredentials.password">
 		</div>
 		<div class="login-form__field-set login-form__field-set--password-hint">
 			<tdamsh-checkbox 
-				[(data)]="userCredentials.isPaswordHidden"
+				[(value)]="userCredentials.isPaswordVisible"
 				[label]="'Show Password'">
-			</tdamsh-checkbox>
-			<!-- <label class="login-form__field-password-hint"> Show password
-				<input
-					name="showPasword"
-					type="checkbox"
-					[(ngModel)]="userCredentials.isPasswordHiden">
-			</label> -->
+			</tdamsh-checkbox>		
 		</div>
 		<div class="login-form__controls">
 			<button class="login-form__button button-primary" 

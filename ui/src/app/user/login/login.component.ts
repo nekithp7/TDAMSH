@@ -15,10 +15,9 @@ export class LoginComponent {
 	public userCredentials: LoginModel = {
 		email: '',
 		password: '',
-		isPaswordHidden: true
+		isPaswordVisible: false
 	};
 
 	private onSingIn(): void {
-		// console.log(this.userCredentials);
 	}
 }
