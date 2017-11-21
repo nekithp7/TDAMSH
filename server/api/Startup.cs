@@ -4,11 +4,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using api.Features.Shared;
+using api.Features.Shared.User;
+using api.Features.Shared.Hash;
+using api.Features.Auth.Service;
+using api.Features.Account.Service;
 
 namespace api
 {
 	public class Startup
-	{
+	{		
 		public Startup(IHostingEnvironment env)
 		{
 			var builder = new ConfigurationBuilder();
@@ -23,7 +27,6 @@ namespace api
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors(options => options.AddPolicy("cors", builder =>
@@ -34,17 +37,21 @@ namespace api
 				.AllowAnyHeader();
 			}));
 
-			services.AddMvc()
-				.AddFeatureFolders();
-
 			services.Configure<DBContext>(options =>
 			{
 				options.ConnectionString = Configuration["ConnectionString"];
 				options.DBName = Configuration["DBName"];
-			});			
+			});
+
+			services.AddMvc()
+				.AddFeatureFolders();
+
+			services.AddTransient<IUserRepository, UserRepository>();
+			services.AddTransient<IHashService, HashService>();
+			services.AddTransient<IAuthService, AuthService>();
+			services.AddTransient<IAccountService, AccountService>();
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -52,8 +59,8 @@ namespace api
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseCors("cors");			
-			app.UseMvc();			
+			app.UseCors("cors");
+			app.UseMvc();
 		}
 	}
 }

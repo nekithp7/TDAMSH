@@ -3,11 +3,9 @@
 namespace api.Features.Shared
 {
 	public class DBContext
-	{
-		private IMongoDatabase database;
+	{		
 		public string ConnectionString { get; set; }
 		public string DBName { get; set; }
-
 		public IMongoDatabase Database
 		{
 			get
@@ -21,5 +19,7 @@ namespace api.Features.Shared
 				return database;
 			}
 		}
+
+		private IMongoDatabase database;
 	}
 }
