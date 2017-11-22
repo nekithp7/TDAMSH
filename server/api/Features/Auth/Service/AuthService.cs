@@ -1,9 +1,10 @@
 ﻿using System;
 
-using api.Features.Account;
 using api.Features.Shared.Hash;
 using api.Features.Shared.User;
+using api.Features.Shared.Token;
 using api.Features.Shared.Response;
+using api.Features.Account;
 
 namespace api.Features.Auth.Service
 {
@@ -11,11 +12,13 @@ namespace api.Features.Auth.Service
 	{
 		private IHashService hashService;
 		private IUserRepository userRepository;
+		private ITokenHandler tokenHandler;
 
-		public AuthService(IUserRepository userRepository, IHashService hashService)
+		public AuthService(IUserRepository userRepository, IHashService hashService, ITokenHandler tokenHandler)
 		{
 			this.userRepository = userRepository;
 			this.hashService = hashService;
+			this.tokenHandler = tokenHandler;
 		}
 
 		public ResponseModel Login(AuthModel model)
@@ -27,7 +30,8 @@ namespace api.Features.Auth.Service
 			if (result)
 			{
 				user.Password = null;
-				return new ResponseModel(200, user);
+				var msg = tokenHandler.CreateToken(user);
+				return new ResponseModel(200, msg);
 			}
 			else
 			{
@@ -44,12 +48,13 @@ namespace api.Features.Auth.Service
 			if (result)
 			{
 				model.Password = null;
-				return new ResponseModel(201, model);
+				var msg = tokenHandler.CreateToken(model);
+				return new ResponseModel(201, msg);
 			}
 			else
 			{
 				return new ResponseModel(409, Messages.ErrEmail409);
-			}			
+			}
 		}
 	}
 }

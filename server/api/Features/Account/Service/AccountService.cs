@@ -32,7 +32,7 @@ namespace api.Features.Account.Service
 			{
 				return new ResponseModel(404, "");
 			}
-		}		
+		}
 
 		public ResponseModel Delete(string id)
 		{

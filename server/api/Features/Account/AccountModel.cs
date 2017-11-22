@@ -8,7 +8,7 @@ namespace api.Features.Account
 		public string Id;
 		public string FirstName;
 		public string LastName;
-		public string Email;		
+		public string Email;
 		public string Password;
 	}
 }

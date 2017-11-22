@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using api.Features.Account.Service;
 
 namespace api.Features.Account
 {
 	[Produces("application/json")]
-	[Route("[controller]")]	
+	[Route("[controller]")]
+	[Authorize]
 	public class AccountController : Controller
 	{
-		private readonly AccountService accountService;
+		private readonly IAccountService accountService;
 
-		public AccountController(AccountService accountService) => this.accountService = accountService;
+		public AccountController(IAccountService accountService) => this.accountService = accountService;
 
-		// PUT api/account
+		// PUT account
 		[HttpPut]
 		public ActionResult Put([FromBody]AccountModel model)
 		{
@@ -21,7 +23,7 @@ namespace api.Features.Account
 			return StatusCode(result.StatusCode, result.Message);
 		}
 
-		// DELETE api/account
+		// DELETE account
 		[HttpDelete]
 		public ActionResult Delete([FromBody] string id)
 		{

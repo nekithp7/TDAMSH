@@ -9,7 +9,7 @@ namespace api.Features.Shared.Hash
 	{
 		private const int SALT_BYTES = 24;
 		private const int HASH_BYTES = 18;
-		private const int ITERATIONS = 64000;		
+		private const int ITERATIONS = 64000;
 
 		public string CreateHash(string password)
 		{

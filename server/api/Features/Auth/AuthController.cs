@@ -13,7 +13,7 @@ namespace api.Features.Auth
 
 		public AuthController(IAuthService authService) => this.authService = authService;
 
-		// POST api/auth/login
+		// POST auth/login
 		[HttpPost("login")]
 		public ActionResult Post([FromBody]AuthModel model)
 		{
@@ -22,7 +22,7 @@ namespace api.Features.Auth
 			return StatusCode(result.StatusCode, result.Message);
 		}
 
-		// POST api/auth/register
+		// POST auth/register
 		[HttpPost("register")]
 		public ActionResult Post([FromBody]AccountModel model)
 		{

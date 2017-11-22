@@ -69,7 +69,7 @@ namespace api.Features.Shared.User
 
 			var result = await userContext.Users.DeleteOneAsync(filter);
 
-			return result.IsAcknowledged && result.DeletedCount == 1;			
+			return result.IsAcknowledged && result.DeletedCount == 1;
 		}
 	}
 }
