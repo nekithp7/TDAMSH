@@ -8,3 +8,5 @@ server/.vs/
 server/api/.vs
 server/api/bin/
 server/api/obj/
+server/Tests/bin
+server/Tests/obj

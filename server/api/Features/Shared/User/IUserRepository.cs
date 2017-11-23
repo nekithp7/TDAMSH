@@ -11,7 +11,9 @@ namespace api.Features.Shared.User
 
 		Task<bool> Add(AccountModel model);
 
-		Task<bool> Put(AccountModel model);
+		Task<bool> Update(string id, AccountModel model);
+
+		Task<bool> UpdatePassword(string id, string newPassword);
 
 		Task<bool> Delete(string id);
 	}

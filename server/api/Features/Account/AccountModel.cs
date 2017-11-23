@@ -10,5 +10,10 @@ namespace api.Features.Account
 		public string LastName;
 		public string Email;
 		public string Password;
+
+		public string GetFullName()
+		{
+			return FirstName + " " + LastName;
+		}
 	}
 }

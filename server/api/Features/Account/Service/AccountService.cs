@@ -4,7 +4,7 @@ using api.Features.Shared.Response;
 
 namespace api.Features.Account.Service
 {
-	public class AccountService : IAccountService
+	public class AccountService : IAccountService //TODO: new token on password change
 	{
 		private IHashService hashService;
 		private IUserRepository userRepository;
@@ -15,14 +15,11 @@ namespace api.Features.Account.Service
 			this.hashService = hashService;
 		}
 
-		public ResponseModel Update(AccountModel model)
+		public ResponseModel UpdatePassword(string id, string newPassword)
 		{
-			if (model.Password != null && model.Password != string.Empty)
-			{
-				model.Password = hashService.CreateHash(model.Password);
-			}
+			var hash = hashService.CreateHash(newPassword);
 
-			var result = userRepository.Put(model).Result;
+			var result = userRepository.UpdatePassword(id, hash).Result;
 
 			if (result)
 			{
@@ -34,7 +31,21 @@ namespace api.Features.Account.Service
 			}
 		}
 
-		public ResponseModel Delete(string id)
+		public ResponseModel UpdateAccountInfo(string id, AccountModel model)
+		{
+			var result = userRepository.Update(id, model).Result;
+
+			if (result)
+			{
+				return new ResponseModel(200, "");
+			}
+			else
+			{
+				return new ResponseModel(409, "Email is not available");
+			}
+		}
+
+		public ResponseModel DeleteAccount(string id)
 		{
 			var result = userRepository.Delete(id).Result;
 

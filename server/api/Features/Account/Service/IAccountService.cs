@@ -4,8 +4,9 @@ namespace api.Features.Account.Service
 {
 	public interface IAccountService
 	{
-		ResponseModel Delete(string id);
-		ResponseModel Logout();
-		ResponseModel Update(AccountModel model);
+		ResponseModel UpdatePassword(string id, string newPassword);
+		ResponseModel UpdateAccountInfo(string id, AccountModel model);
+		ResponseModel DeleteAccount(string id);
+		ResponseModel Logout();		
 	}
 }

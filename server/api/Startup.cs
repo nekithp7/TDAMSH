@@ -89,7 +89,7 @@ namespace api
 			services
 				.AddTransient<IUserRepository, UserRepository>()
 				.AddTransient<IHashService, HashService>()
-				.AddTransient<ITokenHandler, TokenHandler>()
+				.AddTransient<ITokenService, TokenService>()
 				.AddTransient<IAuthService, AuthService>()
 				.AddTransient<IAccountService, AccountService>();
 		}

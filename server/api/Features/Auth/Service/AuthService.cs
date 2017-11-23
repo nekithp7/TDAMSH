@@ -12,31 +12,30 @@ namespace api.Features.Auth.Service
 	{
 		private IHashService hashService;
 		private IUserRepository userRepository;
-		private ITokenHandler tokenHandler;
+		private ITokenService tokenService;
 
-		public AuthService(IUserRepository userRepository, IHashService hashService, ITokenHandler tokenHandler)
+		public AuthService(IUserRepository userRepository, IHashService hashService, ITokenService tokenService)
 		{
 			this.userRepository = userRepository;
 			this.hashService = hashService;
-			this.tokenHandler = tokenHandler;
+			this.tokenService = tokenService;
 		}
 
 		public ResponseModel Login(AuthModel model)
 		{
 			var user = userRepository.Get(model).Result;
 
-			var result = hashService.VerifyPassword(model.Password, user.Password);
+			if (user != null)
+			{
+				var result = hashService.VerifyPassword(model.Password, user.Password);
 
-			if (result)
-			{
-				user.Password = null;
-				var msg = tokenHandler.CreateToken(user);
-				return new ResponseModel(200, msg);
+				if (result)
+				{					
+					var msg = tokenService.CreateToken(user);
+					return new ResponseModel(200, msg);
+				}
 			}
-			else
-			{
-				return new ResponseModel(401, null);
-			}
+			return new ResponseModel(401, "Incorrect Email or password.");
 		}
 
 		public ResponseModel Register(AccountModel model)
@@ -46,9 +45,8 @@ namespace api.Features.Auth.Service
 
 			var result = userRepository.Add(model).Result;
 			if (result)
-			{
-				model.Password = null;
-				var msg = tokenHandler.CreateToken(model);
+			{				
+				var msg = tokenService.CreateToken(model);
 				return new ResponseModel(201, msg);
 			}
 			else

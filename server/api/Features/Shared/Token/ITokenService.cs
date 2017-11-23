@@ -2,8 +2,8 @@
 
 namespace api.Features.Shared.Token
 {
-	public interface ITokenHandler
+	public interface ITokenService
 	{
-		JwtPaket CreateToken(AccountModel model);
+		string CreateToken(AccountModel model);
 	}
 }

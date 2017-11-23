@@ -12,7 +12,7 @@ namespace api.Features.Shared.User
 	{
 		private readonly UserContext userContext;
 
-		public UserRepository(IOptions<DBContext> db) => userContext = new UserContext(db);
+		public UserRepository(IOptions<DBContext> dbContext) => userContext = new UserContext(dbContext);
 
 		public async Task<AccountModel> Get(AuthModel model)
 		{
@@ -43,24 +43,31 @@ namespace api.Features.Shared.User
 			}
 		}
 
-		public async Task<bool> Put(AccountModel model)
+		public async Task<bool> Update(string id, AccountModel model)
 		{
-			var filter = Builders<AccountModel>.Filter.Eq(s => s.Email, model.Email);
+			if (model.Email != null)
+			{
+				var isEmailAvailable = CheckEmailAvailability(id, model.Email);
+				if (!isEmailAvailable)
+				{
+					return false;
+				}
+			}
 
-			var current = await userContext.Users
-				.Find(filter)
-				.FirstOrDefaultAsync();
+			var updateDef = Builders<AccountModel>.Update
+				.Set(s => s.Email, model.Email)
+				.Set(s => s.FirstName, model.FirstName)
+				.Set(s => s.LastName, model.LastName);
 
-			var update = Builders<AccountModel>.Update
-				.Set(s => s.FirstName, model.FirstName ?? current.FirstName)
-				.Set(s => s.LastName, model.LastName ?? current.LastName)
-				.Set(s => s.Email, model.Email ?? current.Email)
-				.Set(s => s.Password, model.Password ?? current.Password);
+			return await Update(id, updateDef);
+		}
 
-			var result = await userContext.Users.UpdateOneAsync(filter, update);
+		public async Task<bool> UpdatePassword(string id, string newPassword)
+		{
+			var updateDef = Builders<AccountModel>.Update
+				.Set(s => s.Password, newPassword);
 
-			return result.IsAcknowledged
-					&& (result.MatchedCount == 1 || result.ModifiedCount == 1);
+			return await Update(id, updateDef);
 		}
 
 		public async Task<bool> Delete(string id)
@@ -69,7 +76,29 @@ namespace api.Features.Shared.User
 
 			var result = await userContext.Users.DeleteOneAsync(filter);
 
-			return result.IsAcknowledged && result.DeletedCount == 1;
+			return result.IsAcknowledged;
+		}
+
+		private async Task<bool> Update(string id, UpdateDefinition<AccountModel> update)
+		{
+			var filter = Builders<AccountModel>.Filter.Eq(s => s.Id, id);
+			var result = await userContext.Users.UpdateOneAsync(filter, update);
+
+			return result.IsAcknowledged;
+		}
+
+		private bool CheckEmailAvailability(string id, string email)
+		{
+			var filter = Builders<AccountModel>.Filter.Eq(s => s.Email, email);
+			var user = userContext.Users
+				.Find(filter)
+				.FirstOrDefault();
+
+			if (user != null && user.Id != id)
+			{
+				return false;
+			}
+			return true;
 		}
 	}
 }
