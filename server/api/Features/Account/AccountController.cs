@@ -15,7 +15,12 @@ namespace api.Features.Account
 
 		public AccountController(IAccountService accountService) => this.accountService = accountService;
 
-		// PUT account/update
+		/// <summary>
+		/// Updates user information
+		/// </summary>
+		/// <param name="model">New user information</param>
+		/// <response code="200">User information updated</response>
+		/// <response code="409">If new Email is not available</response>
 		[HttpPut("update")]
 		public ActionResult Put([FromBody]AccountModel model)
 		{
@@ -26,7 +31,11 @@ namespace api.Features.Account
 			return StatusCode(result.StatusCode, result.Message);
 		}
 
-		// PUT account/password
+		/// <summary>
+		/// Updates user password
+		/// </summary>
+		/// <param name="model">New user information</param>
+		/// <response code="200">Password updated</response>
 		[HttpPut("password")]
 		public ActionResult PutPassword([FromBody]AccountModel model)
 		{
@@ -37,7 +46,10 @@ namespace api.Features.Account
 			return StatusCode(result.StatusCode, result.Message);
 		}
 
-		// DELETE account
+		/// <summary>
+		/// Deletes user from system
+		/// </summary>
+		/// <response code="200">User deleted</response>
 		[HttpDelete]
 		public ActionResult Delete()
 		{
