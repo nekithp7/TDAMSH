@@ -5,12 +5,18 @@
     <UserSecretsId>9d8f407e-9e2d-4e25-b4e4-ab5e2114acbf</UserSecretsId>    
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.0\api.xml</DocumentationFile>
+    <NoWarn>1591;1701;1702;1705</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
     <PackageReference Include="OdeToCode.AddFeatureFolders" Version="1.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.5" />
   </ItemGroup>
 

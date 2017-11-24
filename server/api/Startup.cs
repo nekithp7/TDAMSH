@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IO;
+
+using Swashbuckle.AspNetCore.Swagger;
 
 using api.Features.Shared;
 using api.Features.Shared.User;
@@ -86,6 +90,19 @@ namespace api
 				.AddMvc()
 				.AddFeatureFolders();
 
+			services.AddSwaggerGen(options =>
+			{
+				options.SwaggerDoc("v1", new Info
+				{
+					Version = "v1",
+					Title = "TDAMSH API",
+					Description = "Some description",
+				});
+
+				var xmlPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
+				options.IncludeXmlComments(xmlPath);
+			});
+
 			services
 				.AddTransient<IUserRepository, UserRepository>()
 				.AddTransient<IHashService, HashService>()
@@ -100,6 +117,13 @@ namespace api
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app
+				.UseSwagger()
+				.UseSwaggerUI(options =>
+				{
+					options.SwaggerEndpoint("/swagger/v1/swagger.json", "TDAMSH API");
+				});
 
 			app.UseCors("cors");
 			app.UseAuthentication();
