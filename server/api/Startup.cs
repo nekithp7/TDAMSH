@@ -99,6 +99,14 @@ namespace api
 					Description = "Some description",
 				});
 
+				options.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+				{
+					Description = "JWT Authorization header using the Bearer scheme. E.G.: Bearer {token}",
+					Name = "Authorization",
+					In = "header",
+					Type = "apiKey"
+				});
+
 				var xmlPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
 				options.IncludeXmlComments(xmlPath);
 			});

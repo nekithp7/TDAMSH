@@ -18,6 +18,9 @@ namespace api.Features.Account
 		/// <summary>
 		/// Updates user information
 		/// </summary>
+		/// <remarks>
+		/// Note that you should be authorized
+		/// </remarks>
 		/// <param name="model">New user information</param>
 		/// <response code="200">User information updated</response>
 		/// <response code="409">If new Email is not available</response>
@@ -34,6 +37,9 @@ namespace api.Features.Account
 		/// <summary>
 		/// Updates user password
 		/// </summary>
+		/// <remarks>
+		/// Note that you should be authorized
+		/// </remarks>
 		/// <param name="model">New user information</param>
 		/// <response code="200">Password updated</response>
 		[HttpPut("password")]
@@ -49,6 +55,9 @@ namespace api.Features.Account
 		/// <summary>
 		/// Deletes user from system
 		/// </summary>
+		/// <remarks>
+		/// Note that you should be authorized
+		/// </remarks>
 		/// <response code="200">User deleted</response>
 		[HttpDelete]
 		public ActionResult Delete()
