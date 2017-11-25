@@ -8,7 +8,7 @@ const userRoutes: Routes = <Routes>[
 	{
 		path: 'auth', component: AuthPageComponent,
 		children: [
-			// { path: '', redirectTo: 'login', pathMatch: 'full' },
+			{ path: '', redirectTo: 'login', pathMatch: 'full' },
 			{ path: 'login', component: LoginComponent },
 			{ path: 'registration', component: RegistrationComponent }
 		]

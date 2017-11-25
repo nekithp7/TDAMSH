@@ -42,7 +42,7 @@ export class InterceptedHttp extends Http {
 		return super.delete(url, this.getRequestOptionArgs(options));
 	}
 
-	private updateUrl(req: string) {
+	private updateUrl(req: string): string {
 		return baseUrl + req;
 	}
 

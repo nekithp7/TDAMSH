@@ -6,6 +6,7 @@ import { AppState } from '../../app.reducer';
 import { UserActions } from '../user.actions';
 import { LoginModel } from './login.component.model';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'tdamsh-login',
@@ -19,12 +20,12 @@ export class LoginComponent {
 		isPaswordVisible: false
 	};
 
-	constructor(private loginService: LoginService) { }
+	constructor(private loginService: LoginService, private router: Router) { }
 
 	private onSingIn(): void {
 		this.loginService.login(this.userCredentials.email, this.userCredentials.password)
 			.subscribe((userToken: string) => {
-				// TODO do smth
+				this.router.navigateByUrl('../dashbord');
 			});
 	}
 }

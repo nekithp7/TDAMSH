@@ -5,26 +5,25 @@ import {
 	Request
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../core/auth.service';
 
-export const LOGIN_ENDPOINT = 'http://localhost:52048/auth/login';
+export const LOGIN_ENDPOINT = 'auth/login';
 
 @Injectable()
 export class LoginService {
 
-	constructor(private http: Http) { }
+	constructor(private http: Http, private auth: AuthService) { }
 
 	login(email: string, password: string): Observable<string> {
-		const request = new Request({
-			method: RequestMethod.Post,
-			url: LOGIN_ENDPOINT,
-			body: {
-				Email: email,
-				Password: password
-			}
-		});
-		return this.http.request(request)
+		const body = {
+			email: email,
+			password: password
+		};
+		return this.http.post(LOGIN_ENDPOINT, body)
 			.map(res => {
-				return res.json();
+				const resp = res.json();
+				this.auth.setToken(resp);
+				return resp;
 			});
 	}
 
