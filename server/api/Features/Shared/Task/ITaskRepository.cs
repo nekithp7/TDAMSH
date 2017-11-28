@@ -11,9 +11,9 @@ namespace api.Features.Shared.Task
 
 		Task<TaskModel> Get(string userId, string taskId);
 
-		Task<bool> Add(string userId);
+		Task<bool> Add(string userId, TaskModel model);
 
-		Task<bool> Update(string userId, string taskId, TaskModel model);
+		Task<bool> Update(string userId, TaskModel model);
 
 		Task<bool> Delete(string userId, string taskId);
 	}

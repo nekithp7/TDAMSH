@@ -14,29 +14,69 @@ namespace api.Features.Shared.Task
 
 		public TaskRepository(IOptions<DBContext> dbContext) => taskContext = new TaskContext(dbContext);
 
-		public Task<IEnumerable<TaskModel>> GetAllTasks(string userId)
+		public async Task<IEnumerable<TaskModel>> GetAllTasks(string userId)
 		{
-			throw new System.NotImplementedException();
+			var filter = Builders<TaskModel>.Filter.Eq(s => s.UserId, userId);
+
+			var documents = await taskContext.Tasks
+				.Find(filter)
+				.ToListAsync();			
+
+			return documents;
 		}
 
-		public Task<TaskModel> Get(string userId, string taskId)
+		public async Task<TaskModel> Get(string userId, string taskId)
 		{
-			throw new System.NotImplementedException();
+			var filter = Builders<TaskModel>.Filter.Eq(s => s.Id, taskId) &
+				Builders<TaskModel>.Filter.Eq(s => s.UserId, userId);
+
+			var task = await taskContext.Tasks
+				.Find(filter)
+				.FirstOrDefaultAsync();
+
+			return task;
 		}
 
-		public Task<bool> Add(string userId)
+		public async Task<bool> Add(string userId, TaskModel model)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				await taskContext.Tasks.InsertOneAsync(model);
+				return true;
+			}
+			catch (System.Exception)
+			{
+				return false;
+				throw;
+			}
 		}
 
-		public Task<bool> Update(string userId, string taskId, TaskModel model)
+		public async Task<bool> Update(string userId, TaskModel model)
 		{
-			throw new System.NotImplementedException();
+			if (model.Name != null)
+			{
+				var updateDef = Builders<TaskModel>.Update
+				.Set(s => s.Name, model.Name)
+				.Set(s => s.Description, model.Description);
+
+				var filter = Builders<TaskModel>.Filter.Eq(s => s.Id, model.Id) &
+					Builders<TaskModel>.Filter.Eq(s => s.UserId, userId);
+
+				var result = await taskContext.Tasks.UpdateOneAsync(filter, updateDef);
+
+				return result.IsAcknowledged;
+			}
+			return false;
 		}
 
-		public Task<bool> Delete(string userId, string taskId)
+		public async Task<bool> Delete(string userId, string taskId)
 		{
-			throw new System.NotImplementedException();
+			var filter = Builders<TaskModel>.Filter.Eq(s => s.Id, taskId) &
+				Builders<TaskModel>.Filter.Eq(s => s.UserId, userId);
+
+			var result = await taskContext.Tasks.DeleteOneAsync(filter);
+
+			return result.IsAcknowledged;
 		}
 	}
 }
