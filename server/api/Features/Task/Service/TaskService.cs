@@ -1,4 +1,8 @@
-﻿using api.Features.Shared.Task;
+﻿using System;
+
+using Newtonsoft.Json;
+
+using api.Features.Shared.Task;
 using api.Features.Shared.Response;
 
 namespace api.Features.Task.Service
@@ -11,27 +15,74 @@ namespace api.Features.Task.Service
 
 		public ResponseModel GetAllTasks(string userId)
 		{
-			throw new System.NotImplementedException();
+			var tasks = taskRepository.GetAllTasks(userId).Result;
+
+			var json = JsonConvert.SerializeObject(tasks);
+
+			return new ResponseModel(200, json);
 		}
 
 		public ResponseModel GetTask(string userId, string taskId)
 		{
-			throw new System.NotImplementedException();
+			if (taskId != null && taskId != string.Empty)
+			{
+				var task = taskRepository.Get(userId, taskId).Result;
+
+				if (task != null)
+				{
+					return new ResponseModel(200, task);
+				}
+				return new ResponseModel(404, "");
+			}
+			return new ResponseModel(400, "taskId");
 		}
 
 		public ResponseModel AddTask(string userId, TaskModel model)
 		{
-			throw new System.NotImplementedException();
+			if (model != null)
+			{
+				model.Id = Guid.NewGuid().ToString();
+				model.UserId = userId;
+
+				var result = taskRepository.Add(userId, model).Result;
+
+				if (result)
+				{
+					return new ResponseModel(200, "");
+				}
+				return new ResponseModel(500, "");
+			}
+			return new ResponseModel(400, "model");
 		}
 
-		public ResponseModel UpdateTask(string userId, string taskId, TaskModel model)
+		public ResponseModel UpdateTask(string userId, TaskModel model)
 		{
-			throw new System.NotImplementedException();
+			if (model != null)
+			{
+				var task = taskRepository.Update(userId, model).Result;
+
+				if (task)
+				{
+					return new ResponseModel(200, "");
+				}
+				return new ResponseModel(500, "");
+			}
+			return new ResponseModel(400, "model");
 		}
 
 		public ResponseModel DeleteTask(string userId, string taskId)
 		{
-			throw new System.NotImplementedException();
+			if (taskId != null && taskId != string.Empty)
+			{
+				var result = taskRepository.Delete(userId, taskId).Result;
+
+				if (result)
+				{
+					return new ResponseModel(200, "");
+				}
+				return new ResponseModel(500, "");
+			}
+			return new ResponseModel(400, "model");
 		}
 	}
 }

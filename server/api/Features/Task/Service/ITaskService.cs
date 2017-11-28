@@ -10,7 +10,7 @@ namespace api.Features.Task.Service
 
 		ResponseModel AddTask(string userId, TaskModel model);
 
-		ResponseModel UpdateTask(string userId, string taskId, TaskModel model);
+		ResponseModel UpdateTask(string userId, TaskModel model);
 
 		ResponseModel DeleteTask(string userId, string taskId);
 	}
