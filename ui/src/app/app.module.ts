@@ -10,12 +10,16 @@ import { Http, XHRBackend, RequestOptions } from '@angular/http';
 import { httpFactory } from './core/http.factory';
 import { AuthService } from './core/auth.service';
 import { SharedModule } from './shared/shared.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { AuthGuard } from './core/canActivate.guard';
+import { LoginGuard } from './user/canActivate.guard';
 
 @NgModule({
 	imports: [
 		SharedModule,
 		BrowserModule,
 		UserModule,
+		DashboardModule,
 		StoreModule.provideStore(appReducer),
 		AppRoutingModule
 	],
@@ -28,7 +32,9 @@ import { SharedModule } from './shared/shared.module';
 			useFactory: httpFactory,
 			deps: [XHRBackend, RequestOptions, AuthService]
 		},
-		AuthService
+		AuthService,
+		AuthGuard,
+		LoginGuard
 	],
 	bootstrap: [AppComponent]
 })

@@ -10,4 +10,12 @@ export class AuthService {
 	getToken(): string {
 		return localStorage.getItem('token') || '';
 	}
+
+	isLogedIn(): boolean {
+		return !!localStorage.getItem('token');
+	}
+
+	logOut(): void {
+		localStorage.clear();
+	}
 }
