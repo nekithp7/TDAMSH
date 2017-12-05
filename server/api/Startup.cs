@@ -14,8 +14,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using api.Features.Shared;
 using api.Features.Shared.User;
 using api.Features.Shared.Hash;
+using api.Features.Shared.Task;
 using api.Features.Shared.Token;
 using api.Features.Auth.Service;
+using api.Features.Task.Service;
 using api.Features.Account.Service;
 
 namespace api
@@ -116,7 +118,9 @@ namespace api
 				.AddTransient<IHashService, HashService>()
 				.AddTransient<ITokenService, TokenService>()
 				.AddTransient<IAuthService, AuthService>()
-				.AddTransient<IAccountService, AccountService>();
+				.AddTransient<IAccountService, AccountService>()
+				.AddTransient<ITaskRepository, TaskRepository>()
+				.AddTransient<ITaskService, TaskService>();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)

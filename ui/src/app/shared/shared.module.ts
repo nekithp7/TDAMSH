@@ -3,9 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { CheckboxComponent } from './custom-inputs/checkbox/checkbox.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
 	imports: [
+		HttpModule,
 		FormsModule,
 		CommonModule
 	],
@@ -16,7 +18,9 @@ import { CheckboxComponent } from './custom-inputs/checkbox/checkbox.component';
 	],
 	exports: [
 		FormsModule,
-		CheckboxComponent
+		CheckboxComponent,
+		HttpModule,
+		CommonModule
 	]
 })
 export class SharedModule {

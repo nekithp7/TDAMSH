@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { LoginGuard } from './canActivate.guard';
 
 const userRoutes: Routes = <Routes>[
 	{
-		path: 'auth', component: AuthPageComponent,
+		path: 'auth', component: AuthPageComponent, canActivate: [LoginGuard],
 		children: [
-			// { path: '', redirectTo: 'login', pathMatch: 'full' },
+			{ path: '', redirectTo: 'login', pathMatch: 'full' },
 			{ path: 'login', component: LoginComponent },
 			{ path: 'registration', component: RegistrationComponent }
 		]
